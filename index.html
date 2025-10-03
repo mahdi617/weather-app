@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+      rel="stylesheet"
+    />
+    <title>Frontend Mentor | Weather app</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <header>
+      <a href="/index.html">
+        <img src="./assets/images/logo.svg" alt="site logo" class="site-logo" />
+      </a>
+      <div class="units">
+        <button class="units-btn">
+          <img src="./assets/images/icon-units.svg" class="units-icon" alt="" />
+          <span>units</span>
+          <img
+            src="./assets/images/icon-dropdown.svg"
+            class="magicdropdownmenu-icon"
+            alt=""
+          />
+        </button>
+
+        <div class="magicdropdownmenu magicdropdownmenu-units">
+          <button class="magicdropdownmenu-btn">
+            Switch to Imperial/Metric
+          </button>
+          <div class="magicdropdownmenu-choose">
+            <span class="magicdropdownmenu-title">Temperature</span>
+            <button class="magicdropdownmenu-item active">Celsius (°C)</button>
+            <button class="magicdropdownmenu-item">Fahrenheit (°F)</button>
+          </div>
+          <div class="magicdropdownmenu-choose">
+            <span class="magicdropdownmenu-title">Wind Speed</span>
+            <button class="magicdropdownmenu-item active">km/h</button>
+            <button class="magicdropdownmenu-item">mph</button>
+          </div>
+          <div class="magicdropdownmenu-choose">
+            <span class="magicdropdownmenu-title">Precipitation</span>
+            <button class="magicdropdownmenu-item">Millimeters (mm)</button>
+            <button class="magicdropdownmenu-item active">Inches (in)</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="main-content">
+      <div class="search-section">
+        <h1>How's the sky looking today?</h1>
+        <form action="" class="search-form">
+          <div class="search-input-label">
+            <img
+              src="./assets/images/icon-search.svg"
+              alt="search-icon"
+              class="search-icon"
+            />
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Search for a place..."
+            />
+          </div>
+          <button class="search-btn">Search</button>
+        </form>
+      </div>
+    </main>
+    Search for a city, e.g., New York Search Feels like
+    <!-- Insert temperature here -->
+
+    Humidity
+    <!-- Insert humidity here -->
+
+    Wind
+    <!-- Insert wind here -->
+
+    Precipitation
+    <!-- Insert precipitation here -->
+
+    Daily forecast
+    <!-- Insert daily forecast for the next 7 days here -->
+
+    Hourly forecast
+    <!-- Insert hourly forecast for the selected day here -->
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
+      Coded by <a href="#">Your Name Here</a>.
+    </div>
+
+    <script src="./js/script.js"></script>
+  </body>
+</html>
