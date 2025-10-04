@@ -19,6 +19,12 @@
   font-variation-settings: "wdth" 100;
 }
 
+html {
+  @media screen and (max-width: 768px) {
+    font-size: 12.5px;
+  }
+}
+
 body {
   background-color: hsl(243, 96%, 9%);
   min-width: 320px;
@@ -39,6 +45,10 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: 568px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
 .units {
@@ -46,6 +56,9 @@ header {
   justify-content: center;
   align-items: center;
   position: relative;
+  @media screen and (max-width: 568px) {
+    width: 100%;
+  }
 }
 
 .units-btn {
@@ -63,6 +76,12 @@ header {
 
   &:hover {
     background-color: hsl(243, 23%, 30%);
+  }
+
+  @media screen and (max-width: 568px) {
+    width: 90%;
+    justify-content: center;
+    font-size: 1.15rem;
   }
 }
 
@@ -91,6 +110,10 @@ header {
 .magicdropdownmenu-units {
   display: none;
   min-width: 240px;
+  @media screen and (max-width: 568px) {
+    right: 5%;
+    width: 90%;
+  }
 }
 
 .magicdropdownmenu-choose {
@@ -136,6 +159,7 @@ header {
   border-radius: 0.375rem;
   transition: background-color 0.2s;
   font-size: 0.875rem;
+  margin-bottom: 0.25rem;
 
   &.active {
     background-color: hsl(233, 67%, 56%);
@@ -169,6 +193,10 @@ header {
   align-items: center;
   max-width: 600px;
   margin: 0 auto;
+  @media screen and (max-width: 568px) {
+    flex-direction: column;
+    width: 90%;
+  }
 }
 
 .search-input-label {
@@ -179,6 +207,10 @@ header {
   padding: 0.75rem 1.25rem;
   flex: 1;
   gap: 0.75rem;
+  @media screen and (max-width: 568px) {
+    width: 100%;
+    padding: 0.9rem 1.25rem;
+  }
 }
 
 .search-icon {
@@ -199,7 +231,7 @@ header {
 
 .search-btn {
   background-color: hsl(233, 67%, 56%);
-  color: var(--neutral-0);
+  color: hsl(0, 0%, 100%);
   border: none;
   border-radius: 0.5rem;
   padding: 0.875rem 2rem;
@@ -211,6 +243,10 @@ header {
 
   &:hover {
     background-color: hsl(248, 70%, 36%);
+  }
+
+  @media screen and (max-width: 568px) {
+    width: 100%;
   }
 }
 
@@ -231,7 +267,11 @@ header {
   background-position: center;
   display: flex;
   justify-content: space-between;
-  height: 350px;
+  height: 328px;
+
+  @media screen and (max-width: 768px) {
+    height: 200px;
+  }
 }
 
 .today-weather-place-info {
@@ -278,6 +318,9 @@ header {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
+  @media screen and (max-width: 568px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .weather-states-card {
@@ -314,6 +357,9 @@ header {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 1rem;
+  @media screen and (max-width: 568px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .daily-forecast-card {
@@ -355,14 +401,20 @@ header {
 
 .main-section {
   grid-template-columns: repeat(2, 1fr);
-  gap: 4rem;
+  gap: 2rem;
   display: grid;
+  @media screen and (max-width: 1200px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 aside {
   background-color: hsl(243, 27%, 20%);
   border-radius: 1.5rem;
   padding: 1.75rem 1.75rem 0 1.75rem;
+  @media screen and (max-width: 1200px) {
+    padding-bottom: 1.75rem;
+  }
 }
 
 .Hourly-forecast-header {
@@ -409,6 +461,9 @@ aside {
 
 .magicdropdownmenu-Hourly-forecast {
   display: none;
+  @media screen and (max-width: 568px) {
+    top: calc(80%);
+  }
 }
 
 .Hourly-forecast-main {
@@ -448,4 +503,8 @@ aside {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+}
+
+.attribution {
+  margin-top: 1rem;
 }
