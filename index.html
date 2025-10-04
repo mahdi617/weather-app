@@ -79,30 +79,250 @@
           <button class="search-btn">Search</button>
         </form>
       </div>
+      <section class="main-section">
+        <section class="left-column">
+          <section class="today-weather">
+            <div class="today-weather-place-info">
+              <h2 class="today-weather-place-name">rasht</h2>
+              <p class="today-weather-place-date">Friday, Oct 3, 2025</p>
+            </div>
+            <div class="today-weather-temperature">
+              <img
+                src="./assets/images/icon-sunny.webp"
+                alt="icon"
+                class="today-weather-temp-icon"
+              />
+              <span class="today-weather-temp">12</span>
+            </div>
+          </section>
+          <section class="today-weather-states">
+            <!--  Feels Like  -->
+            <div class="weather-states-card">
+              <p class="title-weather-states-card">Feels Like</p>
+              <span class="weather-states-card-value">6</span>
+            </div>
+            <!--  humidity  -->
+            <div class="weather-states-card">
+              <p class="title-weather-states-card">Humidity</p>
+              <span class="weather-states-card-value">69%</span>
+            </div>
+            <!--  wind  -->
+            <div class="weather-states-card">
+              <p class="title-weather-states-card">Wind</p>
+              <span class="weather-states-card-value">8 km/h</span>
+            </div>
+            <!-- precipitation -->
+            <div class="weather-states-card">
+              <p class="title-weather-states-card">Precipitation</p>
+              <span class="weather-states-card-value">0 mm</span>
+            </div>
+          </section>
+          <!--  daily forecast for the next 7 days -->
+          <section class="place-daily-forecast">
+            <h3 class="place-daily-forecast-title">Daily forecast</h3>
+            <div class="daily-forecast-cards">
+              <div class="daily-forecast-card">
+                <span class="day-name">Fri</span>
+                <img
+                  src="./assets/images/icon-sunny.webp"
+                  alt="icon"
+                  class="day-icon"
+                />
+                <div class="day-temps">
+                  <span class="high-temp">14</span>
+                  <span class="low-temp">9</span>
+                </div>
+              </div>
+              <div class="daily-forecast-card">
+                <span class="day-name">Sat</span>
+                <img
+                  src="./assets/images/icon-sunny.webp"
+                  alt=""
+                  class="day-icon"
+                />
+                <div class="day-temps">
+                  <span class="high-temp">15</span>
+                  <span class="low-temp">9</span>
+                </div>
+              </div>
+              <div class="daily-forecast-card">
+                <span class="day-name">Sun</span>
+                <img
+                  src="./assets/images/icon-sunny.webp"
+                  alt=""
+                  class="day-icon"
+                />
+                <div class="day-temps">
+                  <span class="high-temp">13</span>
+                  <span class="low-temp">12</span>
+                </div>
+              </div>
+              <div class="daily-forecast-card">
+                <span class="day-name">Mon</span>
+                <img
+                  src="./assets/images/icon-sunny.webp"
+                  alt=""
+                  class="day-icon"
+                />
+                <div class="day-temps">
+                  <span class="high-temp">13</span>
+                  <span class="low-temp">12</span>
+                </div>
+              </div>
+              <div class="daily-forecast-card">
+                <span class="day-name">Tue</span>
+                <img
+                  src="./assets/images/icon-sunny.webp"
+                  alt=""
+                  class="day-icon"
+                />
+                <div class="day-temps">
+                  <span class="high-temp">10</span>
+                  <span class="low-temp">9</span>
+                </div>
+              </div>
+              <div class="daily-forecast-card">
+                <span class="day-name">Wed</span>
+                <img
+                  src="./assets/images/icon-sunny.webp"
+                  alt=""
+                  class="day-icon"
+                />
+                <div class="day-temps">
+                  <span class="high-temp">15</span>
+                  <span class="low-temp">12</span>
+                </div>
+              </div>
+              <div class="daily-forecast-card">
+                <span class="day-name">Thu</span>
+                <img
+                  src="./assets/images/icon-sunny.webp"
+                  alt=""
+                  class="day-icon"
+                />
+                <div class="day-temps">
+                  <span class="high-temp">9</span>
+                  <span class="low-temp">8</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+        <!-- hourly forecast for the selected day  -->
+        <aside class="right-column">
+          <div class="Hourly-forecast-header">
+            <h2 class="Hourly-forecast-title">Hourly forecast</h2>
+            <div class="Hourly-forecast-choose-day">
+              <button class="Hourly-forecast-btn">
+                <span class="Hourly-forecast-btn-choose-day">Friday</span>
+                <img
+                  src="./assets/images/icon-dropdown.svg"
+                  alt="icon"
+                  class="Hourly-forecast-btn-choose-day-icon"
+                />
+              </button>
+              <div class="magicdropdownmenu magicdropdownmenu-Hourly-forecast">
+                <button class="magicdropdownmenu-item active">Friday</button>
+                <button class="magicdropdownmenu-item">Saturday</button>
+                <button class="magicdropdownmenu-item">Sunday</button>
+                <button class="magicdropdownmenu-item">Monday</button>
+                <button class="magicdropdownmenu-item">Tuesday</button>
+                <button class="magicdropdownmenu-item">Wedneday</button>
+                <button class="magicdropdownmenu-item">Thursday</button>
+              </div>
+            </div>
+          </div>
+          <div class="Hourly-forecast-main">
+            <div class="Hourly-forecast-card">
+              <span class="Hourly-forecast-time">
+                <img
+                  src="./assets/images/icon-sunny.webp"
+                  alt="icon"
+                  class="Hourly-forecast-icon"
+                />3 AM</span
+              >
+              <span class="Hourly-forecast-temp">16</span>
+            </div>
+            <div class="Hourly-forecast-card">
+              <span class="Hourly-forecast-time">
+                <img
+                  src="./assets/images/icon-sunny.webp"
+                  alt="icon"
+                  class="Hourly-forecast-icon"
+                />4 AM</span
+              >
+              <span class="Hourly-forecast-temp">8</span>
+            </div>
+            <div class="Hourly-forecast-card">
+              <span class="Hourly-forecast-time">
+                <img
+                  src="./assets/images/icon-sunny.webp"
+                  alt="icon"
+                  class="Hourly-forecast-icon"
+                />5 AM</span
+              >
+              <span class="Hourly-forecast-temp">9</span>
+            </div>
+            <div class="Hourly-forecast-card">
+              <span class="Hourly-forecast-time">
+                <img
+                  src="./assets/images/icon-sunny.webp"
+                  alt="icon"
+                  class="Hourly-forecast-icon"
+                />6 AM</span
+              >
+              <span class="Hourly-forecast-temp">10</span>
+            </div>
+            <div class="Hourly-forecast-card">
+              <span class="Hourly-forecast-time">
+                <img
+                  src="./assets/images/icon-sunny.webp"
+                  alt="icon"
+                  class="Hourly-forecast-icon"
+                />7 AM</span
+              >
+              <span class="Hourly-forecast-temp">16</span>
+            </div>
+            <div class="Hourly-forecast-card">
+              <span class="Hourly-forecast-time">
+                <img
+                  src="./assets/images/icon-sunny.webp"
+                  alt="icon"
+                  class="Hourly-forecast-icon"
+                />8 AM</span
+              >
+              <span class="Hourly-forecast-temp">5</span>
+            </div>
+            <div class="Hourly-forecast-card">
+              <span class="Hourly-forecast-time">
+                <img
+                  src="./assets/images/icon-sunny.webp"
+                  alt="icon"
+                  class="Hourly-forecast-icon"
+                />9 AM</span
+              >
+              <span class="Hourly-forecast-temp">12</span>
+            </div>
+            <div class="Hourly-forecast-card">
+              <span class="Hourly-forecast-time">
+                <img
+                  src="./assets/images/icon-sunny.webp"
+                  alt="icon"
+                  class="Hourly-forecast-icon"
+                />10 AM</span
+              >
+              <span class="Hourly-forecast-temp">20</span>
+            </div>
+          </div>
+        </aside>
+      </section>
     </main>
-    Search for a city, e.g., New York Search Feels like
-    <!-- Insert temperature here -->
 
-    Humidity
-    <!-- Insert humidity here -->
-
-    Wind
-    <!-- Insert wind here -->
-
-    Precipitation
-    <!-- Insert precipitation here -->
-
-    Daily forecast
-    <!-- Insert daily forecast for the next 7 days here -->
-
-    Hourly forecast
-    <!-- Insert hourly forecast for the selected day here -->
-
-    <div class="attribution">
+    <!-- <div class="attribution">
       Challenge by
       <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
       Coded by <a href="#">Your Name Here</a>.
-    </div>
+    </div> -->
 
     <script src="./js/script.js"></script>
   </body>

@@ -11,16 +11,13 @@
   font-style: normal;
 }
 
-
 .bricolage-grotesque {
   font-family: "Bricolage Grotesque", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
+  font-variation-settings: "wdth" 100;
 }
-
 
 body {
   background-color: hsl(243, 96%, 9%);
@@ -92,7 +89,7 @@ header {
 }
 
 .magicdropdownmenu-units {
-  // display: none;
+  display: none;
   min-width: 240px;
 }
 
@@ -215,4 +212,240 @@ header {
   &:hover {
     background-color: hsl(248, 70%, 36%);
   }
+}
+
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.today-weather {
+  background-image: url(/assets/images/bg-today-large.svg);
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: space-between;
+  height: 350px;
+}
+
+.today-weather-place-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.today-weather-place-name {
+  font-family: Bricolage Grotesque, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.today-weather-place-date {
+  font-size: 1rem;
+  color: #fffc;
+  margin: 0;
+  font-weight: 300;
+}
+
+.today-weather-temperature {
+  display: flex;
+  align-items: center;
+  width: auto;
+  justify-content: flex-end;
+}
+
+.today-weather-temp-icon {
+  margin-top: 0.5rem;
+  height: 7rem;
+  width: 7rem;
+}
+
+.today-weather-temp {
+  font-family: Bricolage Grotesque, sans-serif;
+  font-size: 6rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.today-weather-states {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.weather-states-card {
+  background-color: hsl(243, 27%, 20%);
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.title-weather-states-card {
+  font-size: 0.875rem;
+  color: hsl(240, 6%, 70%);
+  margin: 0 0 0.75rem;
+  font-weight: 300;
+}
+
+.weather-states-card-value {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.place-daily-forecast {
+  margin-top: 1rem;
+}
+
+.place-daily-forecast-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 1.25rem;
+  color: hsl(0, 0%, 100%);
+}
+
+.daily-forecast-cards {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+}
+
+.daily-forecast-card {
+  background-color: hsl(243, 27%, 20%);
+  border-radius: 1rem;
+  padding: 1.25rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.day-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: hsl(250, 6%, 84%);
+}
+
+.day-icon {
+  width: 3.75rem;
+  height: 3.75rem;
+}
+
+.day-temps {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.875rem;
+
+  :first-child {
+    font-weight: 600;
+    color: hsl(0, 0%, 100%);
+  }
+
+  :last-child {
+    font-weight: 300;
+    color: hsl(240, 6%, 70%);
+  }
+}
+
+.main-section {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4rem;
+  display: grid;
+}
+
+aside {
+  background-color: hsl(243, 27%, 20%);
+  border-radius: 1.5rem;
+  padding: 1.75rem 1.75rem 0 1.75rem;
+}
+
+.Hourly-forecast-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.Hourly-forecast-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: hsl(0, 0%, 100%);
+}
+
+.Hourly-forecast-choose-day {
+  position: relative;
+
+  button {
+    letter-spacing: 0.085rem;
+  }
+}
+
+.Hourly-forecast-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: hsl(243, 23%, 24%);
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.625rem 1rem 0.625rem 1rem;
+  color: hsl(0, 0%, 100%);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-bottom: 1rem;
+
+  img {
+    width: 0.625rem;
+    height: 0.625rem;
+  }
+}
+
+.magicdropdownmenu-Hourly-forecast {
+  display: none;
+}
+
+.Hourly-forecast-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.Hourly-forecast-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: hsl(243, 23%, 24%);
+  border-radius: 0.75rem;
+  padding: 0.57rem 1rem;
+  transition: background-color 0.2s;
+  justify-content: space-between;
+
+  &:hover {
+    background-color: hsl(243, 23%, 30%);
+  }
+
+  img {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  :last-child {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: hsl(0, 0%, 100%);
+  }
+}
+
+.Hourly-forecast-time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
