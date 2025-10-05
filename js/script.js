@@ -474,3 +474,108 @@ async function init() {
 }
 
 init();
+
+/* ====== Temperature Unit Label Toggle (Display-only) ====== */
+/* فقط برچسب °C/°F را کنار عددها عوض می‌کند؛ مقدارها را دست نمی‌زند. */
+
+(() => {
+  let tempSymbol = "°C";
+
+  const stripCF = (s) => String(s).replace(/\s*(?:°\s*[CF])\s*$/i, "");
+
+  const applySymbol = (el) => {
+    if (!el) return;
+    el.textContent = stripCF(el.textContent) + tempSymbol;
+  };
+
+  function updateTempSymbols() {
+    document
+      .querySelectorAll(
+        ".today-weather-temp, .Hourly-forecast-temp, .high-temp, .low-temp"
+      )
+      .forEach(applySymbol);
+
+    // Feels Like = اولین کارت مقادیر وضعیت
+    const states = document.querySelectorAll(".weather-states-card-value");
+    if (states[0]) applySymbol(states[0]);
+  }
+
+  // کمک: یک‌جا سمبل را ست کن + اکتیوکردن آیتم‌های منو
+  function setTempSymbol(symbol) {
+    tempSymbol = symbol; // '°C' | '°F'
+    // اکتیو منوی Temperature
+    const tempItems = document.querySelectorAll(
+      ".magicdropdownmenu-units .magicdropdownmenu-choose:nth-of-type(1) .magicdropdownmenu-item"
+    );
+    tempItems.forEach((b) => b.classList.remove("active"));
+    const target = Array.from(tempItems).find((b) =>
+      tempSymbol === "°F"
+        ? /Fahrenheit/i.test(b.textContent)
+        : /Celsius/i.test(b.textContent)
+    );
+    if (target) target.classList.add("active");
+
+    updateTempSymbols();
+  }
+
+  function wireUnitsTemperatureToggle() {
+    const tempItems = document.querySelectorAll(
+      ".magicdropdownmenu-units .magicdropdownmenu-choose:nth-of-type(1) .magicdropdownmenu-item"
+    );
+    const switchBtn = document.querySelector(
+      ".magicdropdownmenu-units .magicdropdownmenu-btn"
+    );
+    const unitsMenu = document.querySelector(".magicdropdownmenu-units");
+
+    // کلیک روی آیتم‌های Temperature (C/F)
+    tempItems.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setTempSymbol(/Fahrenheit/i.test(btn.textContent) ? "°F" : "°C");
+      });
+    });
+
+    // ⚡️ کلیک روی دکمه‌ی "Switch to Imperial/Metric"
+    if (switchBtn) {
+      switchBtn.addEventListener("click", () => {
+        setTempSymbol(tempSymbol === "°C" ? "°F" : "°C");
+        // اگر منو رو بعد از سوییچ می‌خوای بسته بشه (اختیاری):
+        if (unitsMenu) unitsMenu.style.display = "none";
+      });
+    }
+
+    // اگر دکمه‌ی بالای هدر برای باز/بستن منو داری، تغییری لازم نیست.
+  }
+
+  function observeDynamicRenders() {
+    const container = document.querySelector(".main-content") || document.body;
+    const observer = new MutationObserver((mutations) => {
+      const needsUpdate = mutations.some((m) =>
+        Array.from(m.addedNodes || []).some(
+          (n) =>
+            n.nodeType === 1 &&
+            (n.matches?.(".Hourly-forecast-card, .day-card, .today-weather") ||
+              n.querySelector?.(
+                ".today-weather-temp, .Hourly-forecast-temp, .high-temp, .low-temp, .weather-states-card-value"
+              ))
+        )
+      );
+      if (needsUpdate) updateTempSymbols();
+    });
+    observer.observe(container, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+    });
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    wireUnitsTemperatureToggle();
+    // مقدار پیش‌فرض صفحه معمولاً سلسیوسه
+    setTempSymbol("°C"); // اگر لازم بود '°F' بگذار
+    observeDynamicRenders();
+  });
+
+  // در صورت نیاز، برای رندرهای دستی خودت:
+  window.__updateTempSymbols = updateTempSymbols;
+  window.__setTempSymbol = setTempSymbol;
+})();

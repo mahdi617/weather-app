@@ -422,6 +422,9 @@ aside {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
+  @media screen and (min-width: 1200px) {
+    margin: 0;
+  }
 }
 
 .Hourly-forecast-title {
@@ -509,7 +512,6 @@ aside {
   margin-top: 1rem;
 }
 
-
 // api error styles
 
 .api-error-state {
@@ -547,14 +549,28 @@ aside {
     color: #fff;
     gap: 0.5rem;
 
-    img{
+    img {
       width: 1.25rem;
       height: 1.25rem;
     }
 
-    &:hover{
+    &:hover {
       background-color: hsl(243, 23%, 24%);
     }
   }
 }
 
+/* iOS Safari: جلوگیری از زوم ناگهانی روی فوکوسِ input */
+@supports (-webkit-touch-callout: none) {
+  input[type="text"],
+  input[type="search"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  textarea,
+  select,
+  .search-input {
+    font-size: 16px;   /* کلید اصلی ضد زوم */
+    line-height: 1.2;  /* در صورت نیاز ارتفاع رو کنترل کن */
+  }
+}
