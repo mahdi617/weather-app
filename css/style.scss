@@ -560,6 +560,11 @@ aside {
   }
 }
 
+.error-notfound{
+  display: none;
+  text-align: center;
+}
+
 /* iOS Safari: جلوگیری از زوم ناگهانی روی فوکوسِ input */
 @supports (-webkit-touch-callout: none) {
   input[type="text"],

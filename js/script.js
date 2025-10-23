@@ -1,4 +1,3 @@
-// /js/script.js
 // ======= State =======
 const state = {
   location: { name: "Rasht", latitude: 37.2808, longitude: 49.5832 },
@@ -88,7 +87,6 @@ function hide(el) {
   el.style.display = "none";
 }
 
-// فایل‌ها: ./assets/images/icon-*.webp
 const ICONS = {
   sunny: "./assets/images/icon-sunny.webp",
   partlyCloudy: "./assets/images/icon-partly-cloudy.webp",
@@ -101,7 +99,6 @@ const ICONS = {
 };
 
 function wmoToIcon(code) {
-  // مرجع: کدهای WMO در Open-Meteo
   if (code === 0) return ICONS.sunny; // Clear
   if (code === 1 || code === 2) return ICONS.partlyCloudy; // Mainly clear / Partly cloudy
   if (code === 3) return ICONS.overcast; // Overcast
@@ -155,13 +152,16 @@ async function geocode(name) {
   u.searchParams.set("count", "1");
   u.searchParams.set("language", "en");
   u.searchParams.set("format", "json");
+
   const res = await fetch(u.toString());
   if (!res.ok) throw new Error("geocode-failed");
   const json = await res.json();
+
+  // برای لاگ گرفتن پاسخ:
+  console.log("✅ Geocode response:", json);
+
   if (!json.results || !json.results.length) throw new Error("no-location");
   const r = json.results[0];
-  console.log(u);
-
   return { name: r.name, latitude: r.latitude, longitude: r.longitude };
 }
 
@@ -213,7 +213,6 @@ function renderDaily(json) {
     els.dailyWrap.appendChild(card);
   });
 
-  // مقدار اولیه دکمه انتخاب روز
   const first = new Date(days[0]);
   els.hourlyBtnText.textContent = dayNamesLong[first.getDay()];
 }
@@ -226,22 +225,18 @@ function renderHourly(json) {
 
   els.hourlyWrap.innerHTML = "";
 
-  // فقط ساعت‌هایی که تاریخشون برابر با dayISO هست
-  // تنظیمات بازه‌ی ساعت (۳PM..۱۰PM)
   const START_HOUR = 15; // 3pm
   const END_HOUR = 22; // 10pm
 
-  // هر بار که می‌خوای Hourly رو بسازی:
   els.hourlyWrap.innerHTML = ""; // پاک کردن آیتم‌های قبلی
 
   for (let i = 0; i < hoursISO.length; i++) {
     // فقط همون روز
     if (!hoursISO[i].startsWith(dayISO)) continue;
 
-    const t = new Date(hoursISO[i]); // توجه: Open-Meteo با timezone=auto زمان محلی می‌دهد
+    const t = new Date(hoursISO[i]);
     const h = t.getHours(); // 0..23
 
-    // فقط 15..22 (۳ تا ۱۰ شب) را نگه دار
     if (h >= START_HOUR && h <= END_HOUR) {
       const hourLabel = t.toLocaleTimeString(undefined, {
         hour: "numeric",
@@ -261,18 +256,15 @@ function renderHourly(json) {
       els.hourlyWrap.appendChild(card);
     }
 
-    // کمی بهینه: اگر از 22 گذشتیم، ادامه لازم نیست
     if (h > END_HOUR && hoursISO[i].startsWith(dayISO)) break;
   }
 
-  // اگر هیچ ساعتی در این بازه نبود (مثلاً روز آخرِ دیتاست)، پیام کوچیک بده
   if (!els.hourlyWrap.children.length) {
     els.hourlyWrap.innerHTML = `
     <div class="Hourly-forecast-empty">داده‌ای برای ۳ تا ۱۰ شب این روز موجود نیست.</div>
   `;
   }
 
-  // Dropdown items (جمع‌آوری از daily)
   els.hourlyDropdown.innerHTML = "";
   json.daily.time.forEach((iso, idx) => {
     const d = new Date(iso);
@@ -309,7 +301,6 @@ function toggleHourlyDropdown(force) {
 els.unitsBtn.addEventListener("click", () => toggleUnitsDropdown());
 els.hourlyBtn.addEventListener("click", () => toggleHourlyDropdown());
 
-// بایندکردن گزینه‌های واحد
 function bindUnitOptions() {
   const groups = els.unitsDropdown.querySelectorAll(
     ".magicdropdownmenu-choose"
@@ -392,22 +383,45 @@ function bindUnitOptions() {
 }
 
 // ======= Search =======
+async function onSearch(name) {
+  try {
+    // شهر را از API بگیر
+    const loc = await geocode(name);
+
+    // اگر موفق شد، سکشن اصلی را نشان بده و ارور «شهر پیدا نشد» را ببند
+    document.querySelector(".error-notfound").style.display = "none";
+    document.querySelector(".main-section").style.display = "block";
+    document.querySelector(".main-content").style.display = "block";
+    document.querySelector(".api-error-state").style.display = "none";
+
+    // استیت لوکیشن را آپدیت کن و داده‌ها را بگیر/رندر کن
+    state.location = loc;
+    state.selectedDayIndex = 0;
+    await fetchAndRender();
+  } catch (err) {
+    if (err && err.message === "no-location") {
+      // شهر پیدا نشد
+      document.querySelector(".main-section").style.display = "none";
+      document.querySelector(".error-notfound").style.display = "block";
+    } else {
+      // خطای API یا هر خطای دیگر
+      document.querySelector(".main-content").style.display = "none";
+      document.querySelector(".api-error-state").style.display = "grid";
+    }
+  } finally {
+    // اگر لودر داری، اینجا متوقفش کن
+    stopLoading?.();
+  }
+}
+
 els.searchForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const q = (els.searchInput.value || "").trim();
   if (!q) return;
-  try {
-    startLoading();
-    const loc = await geocode(q);
-    state.location = loc;
-    state.selectedDayIndex = 0;
-    await fetchAndRender();
-    els.searchInput.value = "";
-  } catch (err) {
-    showError("Couldn't find that place. Try another name.");
-  } finally {
-    stopLoading();
-  }
+
+  startLoading?.();
+  await onSearch(q);
+  els.searchInput.value = "";
 });
 
 // ======= Fetch & Render master =======
@@ -462,11 +476,9 @@ function tryGeolocate() {
 }
 
 async function init() {
-  // پیش‌فرض Rasht در HTML شما هست؛ اینجا سعی می‌کنیم GeoLocation بگیریم
   await tryGeolocate();
   bindUnitOptions();
 
-  // هندل retry در باکس خطا
   const retryBtn = document.querySelector(".api-error-state button");
   if (retryBtn) retryBtn.onclick = fetchAndRender;
 
@@ -474,9 +486,6 @@ async function init() {
 }
 
 init();
-
-/* ====== Temperature Unit Label Toggle (Display-only) ====== */
-/* فقط برچسب °C/°F را کنار عددها عوض می‌کند؛ مقدارها را دست نمی‌زند. */
 
 (() => {
   let tempSymbol = "°C";
@@ -495,15 +504,13 @@ init();
       )
       .forEach(applySymbol);
 
-    // Feels Like = اولین کارت مقادیر وضعیت
     const states = document.querySelectorAll(".weather-states-card-value");
     if (states[0]) applySymbol(states[0]);
   }
 
-  // کمک: یک‌جا سمبل را ست کن + اکتیوکردن آیتم‌های منو
   function setTempSymbol(symbol) {
     tempSymbol = symbol; // '°C' | '°F'
-    // اکتیو منوی Temperature
+
     const tempItems = document.querySelectorAll(
       ".magicdropdownmenu-units .magicdropdownmenu-choose:nth-of-type(1) .magicdropdownmenu-item"
     );
@@ -527,23 +534,19 @@ init();
     );
     const unitsMenu = document.querySelector(".magicdropdownmenu-units");
 
-    // کلیک روی آیتم‌های Temperature (C/F)
     tempItems.forEach((btn) => {
       btn.addEventListener("click", () => {
         setTempSymbol(/Fahrenheit/i.test(btn.textContent) ? "°F" : "°C");
       });
     });
 
-    // ⚡️ کلیک روی دکمه‌ی "Switch to Imperial/Metric"
     if (switchBtn) {
       switchBtn.addEventListener("click", () => {
         setTempSymbol(tempSymbol === "°C" ? "°F" : "°C");
-        // اگر منو رو بعد از سوییچ می‌خوای بسته بشه (اختیاری):
+
         if (unitsMenu) unitsMenu.style.display = "none";
       });
     }
-
-    // اگر دکمه‌ی بالای هدر برای باز/بستن منو داری، تغییری لازم نیست.
   }
 
   function observeDynamicRenders() {
