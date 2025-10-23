@@ -388,13 +388,11 @@ async function onSearch(name) {
     // شهر را از API بگیر
     const loc = await geocode(name);
 
-    // اگر موفق شد، سکشن اصلی را نشان بده و ارور «شهر پیدا نشد» را ببند
     document.querySelector(".error-notfound").style.display = "none";
-    document.querySelector(".main-section").style.display = "block";
+    document.querySelector(".main-section").style.display = "grid";
     document.querySelector(".main-content").style.display = "block";
     document.querySelector(".api-error-state").style.display = "none";
 
-    // استیت لوکیشن را آپدیت کن و داده‌ها را بگیر/رندر کن
     state.location = loc;
     state.selectedDayIndex = 0;
     await fetchAndRender();
